@@ -67,7 +67,7 @@ Before these tests, record volume, mute state, and group membership. Use a comfo
 
 ## Recorded validation
 
-2026-09-10, version 0.2.0: a disposable Codex profile successfully loaded the repository marketplace, installed the plugin, and exposed the enabled Sonos HTTP MCP server without a manual `[mcp_servers]` entry. The cached package contained the skill and `.mcp.json`. Plugin/skill validators and JSON/link checks passed.
+2026-09-10, version 0.2.0: a disposable Codex profile successfully loaded the repository marketplace, installed the plugin, and exposed the enabled Sonos HTTP MCP server without a manual `[mcp_servers]` entry. The cached package contained the skill and `.mcp.json`. Plugin/skill validators and JSON/link checks passed. A second disposable profile successfully added `szkocot/sonos-control` from GitHub, installed version 0.2.0, and exposed the bundled server without manual configuration.
 
 The original development notes from 2026-09-10 report a successful read-only discovery of two rooms in separate groups, both `PLAYBACK_STATE_IDLE`, with `HT_PLAYBACK` on both players. No playback, volume, or grouping changes were performed. This is a historical observation, not a claim about the current system.
 

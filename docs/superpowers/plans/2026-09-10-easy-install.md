@@ -11,4 +11,4 @@
 - [x] Update the skill to resolve available Sonos tools by function name across namespaces and provide connection guidance without inventing tool names.
 - [x] Replace README installation steps with `codex plugin marketplace add szkocot/sonos-control` and `codex plugin add sonos-control@sonos-control`, followed by sign-in and a new task. Keep manual setup as a separate fallback.
 - [x] Run plugin/skill validation and exercise marketplace loading and installation with the real CLI; verify OAuth requirements without controlling speakers.
-- [ ] Review the diff, commit, push, and verify the published installation path.
+- [x] Review the diff, commit, push, and verify the published installation path.
