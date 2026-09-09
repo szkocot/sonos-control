@@ -1,4 +1,5 @@
-# Configuration example for an environment without an existing Sonos entry.
+# Manual fallback for standalone skills or clients without bundled plugin MCP.
+# Plugin users should use the bundled connection instead of adding this entry.
 # If Sonos is already configured, reuse that connection instead of adding a duplicate.
 [mcp_servers.sonos]
 enabled = true

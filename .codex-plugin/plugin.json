@@ -1,7 +1,7 @@
 {
   "name": "sonos-control",
-  "version": "0.1.0",
-  "description": "Control Sonos through an existing MCP connection: music, rooms, volume, and groups.",
+  "version": "0.2.0",
+  "description": "Control Sonos music, rooms, volume, and groups with a bundled Sonos MCP connection.",
   "author": {
     "name": "Szymon Kocot"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Sonos Control",
     "shortDescription": "Control Sonos music and rooms in Codex.",
-    "longDescription": "Control Sonos through an existing MCP connection, with tool references and clear rules for playback, volume, grouping, and user authorization.",
+    "longDescription": "Install, connect your Sonos account, and control music, rooms, volume, and speaker groups. Includes the Sonos MCP connection and guidance for reliable, authorized control.",
     "developerName": "Szymon Kocot",
     "category": "Productivity",
     "capabilities": [
@@ -21,5 +21,8 @@
       "What is playing in the Living Room?",
       "Show my Sonos favorites."
     ]
-  }
+  },
+  "mcpServers": "./.mcp.json",
+  "repository": "https://github.com/szkocot/sonos-control",
+  "homepage": "https://github.com/szkocot/sonos-control#readme"
 }

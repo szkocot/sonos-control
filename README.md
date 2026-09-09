@@ -1,8 +1,8 @@
 # Sonos Control
 
-Control your Sonos system from Codex using natural language. Discover rooms, see what is playing, choose music, adjust volume, and manage speaker groups through an existing Sonos MCP connection.
+Control your Sonos system from Codex using natural language. Discover rooms, see what is playing, choose music, adjust volume, and manage speaker groups through the bundled Sonos MCP connection.
 
-This is a community-maintained Codex plugin. It contains a skill and tool reference; it does not include an MCP server and is not an official Sonos plugin.
+This is a community-maintained Codex plugin. It bundles a skill, tool reference, and connection to the Sonos-hosted MCP server; it does not run a local server and is not an official Sonos plugin.
 
 ## What you can do
 
@@ -16,59 +16,54 @@ This is a community-maintained Codex plugin. It contains a skill and tool refere
 
 Availability depends on the connected MCP server, your speakers, and your music services. The included tool snapshot does not expose arbitrary URI/URL playback or TV-input switching.
 
-## Requirements
+## Quick start
 
-- Codex with skills support; plugin installation also requires the `codex plugin` commands.
-- A Sonos system and an account authorized to control it.
-- Access to the Sonos MCP endpoint at `https://mcp.ws.sonos.com/mcp`.
-- Git to clone this repository.
+You need a Sonos **S2** system registered to your own Sonos account, and Codex with plugin support. Sonos must be reachable through [the Sonos web player](https://play.sonos.com/). No API key, developer account, client secret, or local server is needed. Sonos handles registration and sign-in through OAuth. See [Sonos's setup requirements](https://tech-blog.sonos.com/posts/sonos-27mcp/).
 
-## Connect Sonos
+### Install in Codex
 
-If Sonos tools are already available in Codex, reuse that connection. Otherwise, add the server:
+Run these commands in your terminal:
+
+```sh
+codex plugin marketplace add szkocot/sonos-control
+codex plugin add sonos-control@sonos-control
+codex mcp login sonos
+```
+
+The first two commands install the skill **and the Sonos MCP connection**. The last command opens Sonos sign-in in your browser; sign in with the account that owns your system and approve access. If Codex already prompted you to connect Sonos during installation, you can skip the login command.
+
+Start a **new Codex task**, then ask:
+
+> Show my Sonos rooms and what is playing. Do not change anything.
+
+That's it. You do not need to clone this repository, copy skill files, edit TOML, or add the MCP server separately. Every user connects their own account; credentials are managed by Codex and Sonos and are never bundled with the plugin.
+
+In the Codex plugin browser (`/plugins` in the CLI), the plugin appears under the **Sonos Control** marketplace after adding the repository. If your Codex app offers a connection prompt, use it to sign in. Workplace policies must allow third-party plugins and remote MCP connections.
+
+### Already using an older installation?
+
+If you installed version 0.1.0 through a personal marketplace or copied the standalone skill, you can install the GitHub version with the commands above. Once the new version works, disable or remove the older skill/plugin registration to avoid duplicate instructions. An existing working `sonos` MCP connection does not need to be added again. If your client displays multiple Sonos connections, keep one active connection for the account you intend to control.
+
+Do not delete a working connection or credentials before verifying the replacement.
+
+### Other MCP clients or standalone skills
+
+The Sonos server also works with compatible MCP clients without this Codex plugin. Add a **remote HTTP MCP server** with this URL and complete the client's OAuth sign-in:
+
+```text
+https://mcp.ws.sonos.com/mcp
+```
+
+The URL is sufficient for clients that support OAuth discovery and dynamic client registration. This configures Sonos's tools; it does not install this plugin's Codex skill.
+
+For Codex users choosing a standalone skill instead of the plugin, configure the connection manually:
 
 ```sh
 codex mcp add sonos --url https://mcp.ws.sonos.com/mcp
 codex mcp login sonos
 ```
 
-Complete the authentication flow when prompted. The [TOML example](config/sonos-existing-server.toml) is an alternative to `codex mcp add`; use one configuration method and avoid duplicate entries. Keep authentication credentials outside this repository.
-
-The plugin intentionally omits `.mcp.json` because it uses an existing connection exposing `mcp__sonos__*` tools.
-
-## Install
-
-Clone the repository:
-
-```sh
-mkdir -p ~/plugins
-git clone https://github.com/szkocot/sonos-control.git ~/plugins/sonos-control
-```
-
-### As a standalone skill
-
-This is the simplest way to use the instructions without registering a plugin marketplace:
-
-```sh
-mkdir -p ~/.agents/skills
-cp -R ~/plugins/sonos-control/skills/sonos-control ~/.agents/skills/
-```
-
-If that destination already exists, update its contents instead of nesting another `sonos-control` directory inside it. Start a new Codex task after installation.
-
-### As a Codex plugin
-
-Register the cloned directory in your personal plugin marketplace using Codex's plugin-creator skill. You can ask Codex:
-
-> Register `~/plugins/sonos-control` as an existing plugin in my personal marketplace, preserving the plugin files and other marketplace entries, then install it.
-
-Once the entry exists in `~/.agents/plugins/marketplace.json`, install it using the marketplace's name:
-
-```sh
-codex plugin add sonos-control@personal
-```
-
-Replace `personal` if your marketplace uses another name. The default personal marketplace is discovered automatically. Start a new Codex task to load the plugin. Choose either the standalone skill or plugin installation to avoid duplicate skill registrations.
+The [TOML example](config/sonos-existing-server.toml) is an alternative to the `mcp add` command. **Plugin users should skip this manual setup.**
 
 ## Try it
 
@@ -96,21 +91,25 @@ Tool results are checked before reporting success. Ambiguous mutation timeouts t
 
 ## Updates
 
-Pull the latest source:
+Refresh the GitHub marketplace and reinstall the latest plugin:
 
 ```sh
-git -C ~/plugins/sonos-control pull --ff-only
+codex plugin marketplace upgrade sonos-control
+codex plugin add sonos-control@sonos-control
 ```
 
-For a standalone installation, replace the installed skill's files with the updated contents of `skills/sonos-control/`. For a plugin installation, ask Codex's plugin-creator skill to refresh the local plugin cache and reinstall it from the existing marketplace. Start a new task after either update.
+Start a new task after updating. Sign in again only if Codex requests it.
 
 ## Troubleshooting
 
 | Problem | What to check |
 |---|---|
-| Sonos tools are missing | Configure the MCP connection, authenticate, and start a new task. Installing this plugin alone does not connect your account. |
+| Sonos tools are missing | Confirm the plugin is installed and enabled, connect Sonos, and start a new task. The plugin supplies the server configuration; you still need to sign in. |
 | Authentication has expired | Run `codex mcp login sonos` and reconnect. |
-| Plugin installation cannot find the plugin | Confirm that your personal marketplace contains an entry pointing to the clone and that you used its actual marketplace name. |
+| Plugin installation cannot find the plugin | Run `codex plugin marketplace add szkocot/sonos-control`, then install `sonos-control@sonos-control`. |
+| `codex plugin` is not recognized | Update Codex to a version with plugin support, or use the manual MCP connection above. |
+| Login reports that `sonos` is unknown | Check `codex mcp list` for the bundled server name and use it with `codex mcp login`. Confirm the plugin is enabled before adding any manual connection. |
+| Sign-in succeeds but no system appears | Use the Sonos account that owns the S2 system and confirm it works in the Sonos web player. |
 | A room cannot be found | Ask Codex to discover the system again and use the current room name. |
 | An action affects more rooms than expected | Check group membership; playback controls act on the whole group. |
 | A source or feature is unavailable | Check hardware capabilities and the current server's tool declarations. |
@@ -123,7 +122,9 @@ For a standalone installation, replace the installed skill's files with the upda
 | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) | Plugin metadata and example prompts |
 | [`skills/sonos-control/SKILL.md`](skills/sonos-control/SKILL.md) | Sonos control instructions and authorization rules |
 | [`skills/sonos-control/references/tool-schemas.md`](skills/sonos-control/references/tool-schemas.md) | Snapshot of tool declarations from the development environment |
-| [`config/sonos-existing-server.toml`](config/sonos-existing-server.toml) | Optional connection configuration example |
+| [`.mcp.json`](.mcp.json) | Bundled Sonos HTTP MCP connection |
+| [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | GitHub-installable marketplace |
+| [`config/sonos-existing-server.toml`](config/sonos-existing-server.toml) | Manual connection fallback for standalone skills |
 | [`TESTING.md`](TESTING.md) | Validation commands and manual scenarios |
 
 ## Development and testing

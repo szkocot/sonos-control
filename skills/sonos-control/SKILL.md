@@ -3,9 +3,9 @@ name: sonos-control
 description: Use when the user asks to control Sonos speakers, check rooms or playback, change music, volume or sources, or group and ungroup rooms through Sonos MCP.
 ---
 
-# Sonos through an existing MCP server
+# Sonos control
 
-Use the available `mcp__sonos__*` tools. This plugin requires a configured Sonos MCP connection; it does not run its own server. If the tools are missing, explain that the connection is unavailable and refer to the plugin README for setup. Never invent tools, parameters, or identifiers. Current tool declarations take precedence over the [tool snapshot](references/tool-schemas.md).
+This plugin bundles the Sonos MCP connection. Use the Sonos tools exposed in the current session: their prefix may be `mcp__sonos__*` or a plugin-specific namespace. Match the function names below to the actual available declarations, and use one connected Sonos tool set consistently; never execute the same operation through duplicate connections. If tools are missing or authentication is required, guide the user to connect Sonos in the plugin settings (or `/mcp` in Codex CLI), complete the browser sign-in, and start a new task. Do not tell plugin users to add a second MCP server. Standalone skill installations need the manual connection described in the README. Never invent tools, parameters, or identifiers. Current tool declarations take precedence over the [tool snapshot](references/tool-schemas.md).
 
 ## Discovery and read operations
 
@@ -17,7 +17,7 @@ Use the available `mcp__sonos__*` tools. This plugin requires a configured Sonos
 
 ## Choosing an operation
 
-The table omits the `mcp__sonos__` prefix. Parameter names match the schemas; values must come from discovery, tool results, or the user's intent.
+The table uses unprefixed function names; use the actual namespace exposed by the connected Sonos server. Parameter names match the schemas; values must come from discovery, tool results, or the user's intent.
 
 | Intent | Tool and parameters |
 |---|---|
