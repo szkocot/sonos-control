@@ -1,0 +1,25 @@
+{
+  "name": "sonos-control",
+  "version": "0.1.0",
+  "description": "Control Sonos through an existing MCP connection: music, rooms, volume, and groups.",
+  "author": {
+    "name": "Szymon Kocot"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Sonos Control",
+    "shortDescription": "Control Sonos music and rooms in Codex.",
+    "longDescription": "Control Sonos through an existing MCP connection, with tool references and clear rules for playback, volume, grouping, and user authorization.",
+    "developerName": "Szymon Kocot",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Show my Sonos rooms and their status.",
+      "What is playing in the Living Room?",
+      "Show my Sonos favorites."
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+# Configuration example for an environment without an existing Sonos entry.
+# If Sonos is already configured, reuse that connection instead of adding a duplicate.
+[mcp_servers.sonos]
+enabled = true
+url = "https://mcp.ws.sonos.com/mcp"
