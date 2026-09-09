@@ -1,5 +1,7 @@
 # Sonos Control
 
+<img src="assets/icon.png" alt="Sonos Control speaker icon" width="96" height="96">
+
 Control your Sonos system from Codex using natural language. Discover rooms, see what is playing, choose music, adjust volume, and manage speaker groups through the bundled Sonos MCP connection.
 
 This is a community-maintained Codex plugin. It bundles a skill, tool reference, and connection to the Sonos-hosted MCP server; it does not run a local server and is not an official Sonos plugin.

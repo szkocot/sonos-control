@@ -1,6 +1,6 @@
 {
   "name": "sonos-control",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Control Sonos music, rooms, volume, and groups with a bundled Sonos MCP connection.",
   "author": {
     "name": "Szymon Kocot"
@@ -20,7 +20,11 @@
       "Show my Sonos rooms and their status.",
       "What is playing in the Living Room?",
       "Show my Sonos favorites."
-    ]
+    ],
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
+    "logoDark": "./assets/icon.png",
+    "brandColor": "#111111"
   },
   "mcpServers": "./.mcp.json",
   "repository": "https://github.com/szkocot/sonos-control",

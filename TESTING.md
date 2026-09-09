@@ -21,7 +21,7 @@ The validators check structure, not model behavior or speaker behavior. They may
 
 Use a disposable Codex test profile to avoid changing your usual plugins or credentials. With the repository marketplace added, verify:
 
-1. `codex plugin list --available --marketplace sonos-control --json` lists version `0.2.0`, source at the repository root, and authentication policy `ON_INSTALL`.
+1. `codex plugin list --available --marketplace sonos-control --json` lists the version in `.codex-plugin/plugin.json`, source at the repository root, and authentication policy `ON_INSTALL`.
 2. `codex plugin add sonos-control@sonos-control --json` installs successfully.
 3. `codex mcp list --json` includes the enabled `sonos` server with HTTP URL `https://mcp.ws.sonos.com/mcp`, without a manual `mcp add` command.
 4. The installed plugin contains `.mcp.json` and `skills/sonos-control/SKILL.md`.
